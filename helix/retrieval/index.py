@@ -33,7 +33,11 @@ def _get_embedder():
     if _embedder is None:
         from sentence_transformers import SentenceTransformer
 
-        _embedder = SentenceTransformer(EMBED_MODEL_NAME)
+        _embedder = SentenceTransformer(
+            EMBED_MODEL_NAME,
+            device="cuda",
+            model_kwargs={"attn_implementation": "eager"},
+            )
     return _embedder
 
 
